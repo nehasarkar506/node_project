@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Game</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    .question {
+        margin-bottom: 20px;
+    }
+    .options label {
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Quiz Game</h1>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <div id="result"></div>
+</div>
+<h2 id="heading">Original Heading</h2>
+<h2 class="hi">hi</h2>
+<button type="submit" onclick="next()">click me</button>
+<button id="changeHeadingButton">Change Heading</button>
+<div id="container"></div>
+<script>
+
+   // Start time when the page loads
+// var startTime = new Date().getTime();
+
+// // Function to calculate time spent on the page
+// function calculateTimeSpent() {
+//     var endTime = new Date().getTime();
+//     var timeSpent = endTime - startTime;
+//     return timeSpent;
+// }
+
+// // Function to display time spent on the page
+// function displayTimeSpent() {
+//     var timeSpent = calculateTimeSpent();
+//     console.log("Time spent on page: " + timeSpent + " milliseconds");
+// }
+
+// // Call displayTimeSpent when the page unloads
+// window.addEventListener("beforeunload", displayTimeSpent);
+
+// calculateTimeSpent();
+// displayTimeSpent();
+
+
+var startTime = new Date().getTime();
+        
+        // Add an event listener for when the page unloads
+        window.addEventListener("beforeunload", function() {
+            // Calculate the time spent on the page
+            var endTime = new Date().getTime();
+            var timeSpent = endTime - startTime;
+            
+            // Display the time spent on the page
+            console.log("Time spent on page: " + timeSpent + " milliseconds");
+            var d = document.getElementById('result');
+            d.innerHTML = timeSpent;
+        });
+
+    const questions = [
+        {
+            question: "What is the capital city of France?",
+            options: ["London", "Paris", "Rome", "Berlin"],
+            answer: "Paris"
+        },
+        {
+            question: "Who wrote the famous play 'Romeo and Juliet'?",
+            options: ["William Shakespeare", "Jane Austen", "Charles Dickens", "Mark Twain"],
+            answer: "William Shakespeare"
+        },
+        {
+            question: "What is the largest planet in our solar system?",
+            options: ["Jupiter", "Saturn", "Uranus", "Neptune"],
+            answer: "Jupiter"
+        }
+        // Add more questions here
+    ];
+
+    let currentQuestion = 0;
+    const questionElement = document.getElementById('question');
+    const optionsElement = document.getElementById('options');
+    const resultElement = document.getElementById('result');
+
+    function loadQuestion() {
+        const question = questions[currentQuestion];
+        questionElement.textContent = question.question;
+        optionsElement.innerHTML = '';
+        question.options.forEach((option, index) => {
+            const radioBtn = document.createElement('input');
+            radioBtn.type = 'radio';
+            radioBtn.name = 'option';
+            radioBtn.value = option;
+            radioBtn.id = 'option' + index;
+
+            const label = document.createElement('label');
+            label.textContent = option;
+            label.setAttribute('for', 'option' + index);
+
+            optionsElement.appendChild(radioBtn);
+            optionsElement.appendChild(label);
+            optionsElement.appendChild(document.createElement('br'));
+        });
+    }
+
+    function checkAnswer() {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        if (!selectedOption) {
+            alert('Please select an option.');
+            return;
+        }
+        const answer = selectedOption.value;
+        if (answer === questions[currentQuestion].answer) {
+            resultElement.textContent = 'Correct!';
+            
+        } else {
+            resultElement.textContent = 'Incorrect! The correct answer is ' + questions[currentQuestion].answer;
+        }
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            resultElement.textContent = 'Quiz completed!';
+            optionsElement.innerHTML = '';
+            questionElement.textContent = '';
+        }
+    }
+
+    // Load the first question
+    loadQuestion();
+    const headingElement = document.getElementById('heading');
+const changeHeadingButton = document.getElementById('changeHeadingButton');
+
+changeHeadingButton.addEventListener('click', function() {
+  headingElement.textContent = 'New Heading'; 
+});
+
+var text = document.getElementsByClassName('hi')[0];
+function next()
+{
+    text.textContent= 'bye';
+}
+
+// Create a new button element
+const newButton = document.createElement('button');
+newButton.textContent = 'Click Me';
+
+// Get the container element where you want to append the button
+const container = document.getElementById('container');
+
+// Append the button to the container
+container.appendChild(newButton);
+
+// Create a new button element
+const printButton = document.createElement('button');
+printButton.textContent = 'Print';
+
+// Append the button to the body of the document
+document.body.appendChild(printButton);
+
+// Add event listener to the button
+printButton.addEventListener('click', function() {
+  window.print(); // Print the document
+});
+
+
+// const newButton = document.createElement('button');
+// newButton.textContent = 'Click Me';
+
+// // Get the container element where you want to append the button
+// const container = document.getElementById('btn2');
+
+// // Append the button to the container
+// container.appendChild(newButton);
+
+// // Create a new button element
+// const printButton = document.createElement('button');
+// printButton.textContent = 'Print';
+
+// // Append the button to the body of the document
+// document.body.appendChild(printButton);
+
+// // Add event listener to the button
+// printButton.addEventListener('click', function() {
+//   window.print(); // Print the document
+// });
+
+function calculateCorrectIncorrectQuestions(questions) {
+    let correctCount = 0;
+    let incorrectCount = 0;
+
+    questions.forEach(question => {
+        if (question.question === "correct") {
+            correctCount++;
+        } else if (question.question === "incorrect") {
+            incorrectCount++;
+        }
+    });
+
+    return { correct: correctCount, incorrect: incorrectCount };
+}
+
+// Example usage:
+const question = [
+    { question: "correct" },
+    { question: "incorrect" },
+    { question: "correct" },
+    { question: "incorrect" },
+    { question: "correct" }
+];
+
+const result = calculateCorrectIncorrectQuestions(question);
+console.log("Correct questions:", result.correct);
+console.log("Incorrect questions:", result.incorrect);
+
+
+</script>
+
+</body>
+</html>

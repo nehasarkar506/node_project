@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <script src="../assets/js/bootstrap.js"></script>
+    <script src="../assets/js/demo.js" defer></script>
+    <script src="../assets/js/css.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    
+        <div class="container">
+            <a href="../index.html">
+                <h1 class="p-5 text-center">Quiz Game</h1>
+            </a>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <h2 class="my-4 mx-5">Timer: <span id="timer">00:00</span></h2>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h2 class="my-4 mx-5">Questions: <span id="total"></span></h2>
+                        </div>
+                        <div class="col-12">
+                          <div id="question" class="text-center my-4">Question </div>
+                        </div>
+                        <div class="col-12 col-md-6 p-5">
+                           <div class="question" id="question"></div>
+                           <div class="options" id="options"></div>                  
+                        </div>
+                           <div class="col-12 col-md-6 p-5">
+                            <div id="result"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-5 mx-5">
+                                <button onclick="checkAnswer()" class="button-pushable button-sm mt-3" role="button" id="btn1">
+                                    <span class="button-shadow"></span>
+                                    <span class="button-edge"></span>
+                                    <span class="button-front text">
+                                        Submit 
+                                    </span></button>
+                                   
+                               </div>
+                               <div class="col-12 col-md-6">
+                                <button onclick="next()" class="button-pushable button-sm mt-3" role="button" id="btn2">
+                                    <span class="button-shadow"></span>
+                                    <span class="button-edge"></span>
+                                    <span class="button-front text">
+                                        next
+                                    </span></button>
+                               </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    
+</body>
+</html>
